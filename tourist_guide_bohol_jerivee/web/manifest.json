@@ -1,0 +1,33 @@
+{
+  "name": "Bohol Explorer - Tourist Information and Travel Guide",
+  "short_name": "Bohol Explorer",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "background_color": "#FCFDFD",
+  "theme_color": "#087E8B",
+  "description": "Discover Bohol destinations, offline maps, travel guides, and recommended itineraries even without an internet connection.",
+  "orientation": "any",
+  "lang": "en",
+  "categories": ["travel", "navigation", "education"],
+  "icons": [
+    {
+      "src": "icons/Icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/Icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/Icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

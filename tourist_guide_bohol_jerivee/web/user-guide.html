@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#087E8B">
+<meta name="description" content="Step-by-step phone guide for Bohol Explorer: open the app, sign in, search destinations, use the map, download offline maps, and test offline access.">
+<title>Bohol Explorer — Phone User Guide</title>
+<style>
+  :root {
+    --teal: #087E8B;
+    --teal-dark: #075B65;
+    --teal-soft: #E7F3F0;
+    --ink: #1D2E33;
+    --muted: #5C7478;
+    --line: #DDE8E6;
+    --paper: #FCFDFD;
+    --warm: #FFF6E6;
+    --warm-line: #F0D9AE;
+    --warm-ink: #7A4B0F;
+    --danger: #A63A3A;
+    --danger-soft: #FFF1F0;
+    --radius: 16px;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-text-size-adjust: 100%;
+  }
+  a { color: var(--teal-dark); }
+  .wrap { max-width: 820px; margin: 0 auto; padding: 0 18px 64px; }
+
+  /* Header */
+  header.hero {
+    background: linear-gradient(145deg, #075B65 0%, #087E8B 58%, #3FA38F 100%);
+    color: #fff;
+    padding: 30px 18px 34px;
+  }
+  .hero-inner { max-width: 820px; margin: 0 auto; }
+  .brand { display: flex; align-items: center; gap: 12px; }
+  .brand-mark {
+    width: 46px; height: 46px; border-radius: 13px;
+    background: rgba(255,255,255,.16);
+    display: grid; place-items: center; font-size: 24px;
+    border: 1px solid rgba(255,255,255,.25);
+  }
+  .brand-name { font-size: 13px; font-weight: 800; letter-spacing: 1.4px; }
+  .brand-sub { font-size: 11px; opacity: .82; letter-spacing: .3px; }
+  .eyebrow {
+    display: inline-block; margin-top: 26px; padding: 6px 12px;
+    border-radius: 30px; background: rgba(255,255,255,.15);
+    font-size: 10px; font-weight: 800; letter-spacing: 1.4px;
+  }
+  h1 { font-size: clamp(30px, 8vw, 44px); line-height: 1.08; margin: 14px 0 12px; letter-spacing: -1px; }
+  .hero p { margin: 0; max-width: 560px; color: rgba(255,255,255,.9); font-size: 14.5px; }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    min-height: 46px; padding: 11px 18px; border-radius: 999px;
+    font-size: 14px; font-weight: 800; text-decoration: none;
+    border: 1px solid transparent; cursor: pointer; font-family: inherit;
+  }
+  .btn-primary { background: #fff; color: var(--teal-dark) !important; }
+  .btn-ghost { background: rgba(255,255,255,.1); color: #fff !important; border-color: rgba(255,255,255,.5); }
+  .btn-outline { background: #fff; color: var(--teal-dark) !important; border-color: var(--line); }
+  .meta { margin-top: 16px; font-size: 11.5px; opacity: .78; }
+
+  /* Navigation chips */
+  nav.jump {
+    position: sticky; top: 0; z-index: 20;
+    background: rgba(252,253,253,.96);
+    border-bottom: 1px solid var(--line);
+    backdrop-filter: blur(8px);
+  }
+  .jump-scroll {
+    max-width: 820px; margin: 0 auto; padding: 10px 18px;
+    display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none;
+  }
+  .jump-scroll::-webkit-scrollbar { display: none; }
+  .jump a {
+    flex: 0 0 auto; text-decoration: none; font-size: 12px; font-weight: 700;
+    color: var(--teal-dark); background: var(--teal-soft);
+    padding: 7px 12px; border-radius: 999px;
+  }
+
+  /* Sections */
+  section { scroll-margin-top: 64px; margin-top: 38px; }
+  .section-kicker { font-size: 10.5px; font-weight: 900; letter-spacing: 1.5px; color: var(--teal); text-transform: uppercase; }
+  h2 { font-size: 25px; line-height: 1.2; margin: 6px 0 10px; letter-spacing: -.5px; }
+  h3 { font-size: 17px; margin: 26px 0 8px; }
+  h4 { font-size: 15px; margin: 20px 0 6px; }
+  p { margin: 0 0 12px; }
+  .lead { color: var(--muted); font-size: 15px; }
+  .small { font-size: 13px; color: var(--muted); }
+  ul, ol { margin: 8px 0 14px; padding-left: 22px; }
+  li { margin: 7px 0; }
+  li > ul, li > ol { margin: 6px 0; }
+  code, kbd {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 13px; background: #F1F6F5; border: 1px solid var(--line);
+    padding: 1px 6px; border-radius: 6px; word-break: break-word;
+  }
+  pre {
+    background: #0F2B30; color: #E6F4F1; border-radius: 12px;
+    padding: 14px 15px; overflow-x: auto; font-size: 12.5px; line-height: 1.6;
+    margin: 10px 0 14px; -webkit-overflow-scrolling: touch;
+  }
+  pre code { background: none; border: 0; padding: 0; color: inherit; font-size: inherit; }
+
+  .card {
+    background: #fff; border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 18px; margin: 14px 0;
+  }
+  .callout {
+    border-radius: var(--radius); padding: 15px 16px; margin: 16px 0;
+    background: var(--teal-soft); border: 1px solid #CBE4DE;
+    font-size: 14px;
+  }
+  .callout strong { color: var(--teal-dark); }
+  .warn { background: var(--warm); border-color: var(--warm-line); color: #5B421C; }
+  .warn strong { color: var(--warm-ink); }
+  .danger { background: var(--danger-soft); border-color: #F2D2CF; color: #5C2B2B; }
+  .danger strong { color: var(--danger); }
+  .callout p:last-child { margin-bottom: 0; }
+
+  /* Quick start */
+  .quick {
+    counter-reset: quick;
+    list-style: none; padding: 0; margin: 12px 0 0;
+  }
+  .quick li {
+    counter-increment: quick; position: relative;
+    padding: 0 0 0 44px; margin: 0 0 16px;
+  }
+  .quick li::before {
+    content: counter(quick);
+    position: absolute; left: 0; top: 0;
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--teal); color: #fff;
+    display: grid; place-items: center;
+    font-size: 13px; font-weight: 900;
+  }
+  .quick strong { display: block; font-size: 15px; }
+
+  /* Numbered step groups */
+  .steps { list-style: none; padding: 0; margin: 10px 0 0; counter-reset: step; }
+  .steps > li {
+    counter-increment: step; position: relative;
+    padding-left: 40px; margin: 0 0 18px;
+  }
+  .steps > li::before {
+    content: counter(step);
+    position: absolute; left: 0; top: 1px;
+    width: 27px; height: 27px; border-radius: 9px;
+    background: var(--teal-soft); color: var(--teal-dark);
+    display: grid; place-items: center;
+    font-size: 12px; font-weight: 900;
+  }
+  .steps > li strong:first-child { display: inline; }
+
+  /* Tables */
+  .table-wrap { overflow-x: auto; margin: 12px 0 18px; -webkit-overflow-scrolling: touch; }
+  table { width: 100%; border-collapse: collapse; font-size: 13.5px; min-width: 520px; }
+  th, td { text-align: left; vertical-align: top; padding: 11px 12px; border-bottom: 1px solid var(--line); }
+  th { background: #F3F8F7; font-size: 11.5px; letter-spacing: .4px; text-transform: uppercase; color: var(--muted); }
+  tr:last-child td { border-bottom: 0; }
+
+  /* Feature blocks */
+  .feature {
+    display: flex; gap: 13px; align-items: flex-start;
+    padding: 15px 0; border-bottom: 1px solid var(--line);
+  }
+  .feature:last-child { border-bottom: 0; }
+  .feature-icon {
+    flex: 0 0 38px; width: 38px; height: 38px; border-radius: 11px;
+    background: var(--teal-soft); display: grid; place-items: center; font-size: 19px;
+  }
+  .feature h4 { margin: 0 0 3px; font-size: 15px; }
+  .feature p { margin: 0; font-size: 13.5px; color: var(--muted); }
+
+  .checklist { list-style: none; padding: 0; }
+  .checklist li { position: relative; padding-left: 30px; margin: 9px 0; }
+  .checklist li::before {
+    content: "✓"; position: absolute; left: 0; top: 0;
+    width: 21px; height: 21px; border-radius: 6px;
+    background: var(--teal-soft); color: var(--teal-dark);
+    display: grid; place-items: center; font-size: 12px; font-weight: 900;
+  }
+
+  .footer-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+  footer {
+    margin-top: 44px; padding-top: 20px; border-top: 1px solid var(--line);
+    font-size: 12px; color: var(--muted);
+  }
+  .top-link { display: inline-block; margin-top: 8px; font-size: 12px; font-weight: 700; }
+
+  @media (min-width: 700px) {
+    body { font-size: 16.5px; }
+    .hero { padding: 44px 24px 48px; }
+    .wrap { padding: 0 24px 80px; }
+    .card { padding: 22px; }
+  }
+
+  @media print {
+    @page { margin: 14mm; }
+    body { background: #fff; font-size: 11pt; }
+    header.hero { background: #075B65 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    nav.jump, .hero-actions, .footer-actions, .top-link { display: none !important; }
+    section { page-break-inside: auto; margin-top: 22px; }
+    .card, .callout, table { page-break-inside: avoid; }
+    h2, h3 { page-break-after: avoid; }
+    a { color: inherit; text-decoration: none; }
+    pre { background: #F1F6F5; color: #123; border: 1px solid #ccc; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="brand">
+      <div class="brand-mark" aria-hidden="true">🧭</div>
+      <div>
+        <div class="brand-name">BOHOL EXPLORER</div>
+        <div class="brand-sub">Tourist information &amp; travel guide</div>
+      </div>
+    </div>
+    <div class="eyebrow">PHONE USER GUIDE</div>
+    <h1>Use Bohol Explorer<br>on your cellphone</h1>
+    <p>Step-by-step instructions for opening the app, signing in, finding destinations, using the map, downloading offline maps, and testing the guide without internet.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="Bohol-Explorer-Phone-Guide.pdf" download>⬇ Download PDF</a>
+      <a class="btn btn-ghost" href="user-guide.html" download="Bohol-Explorer-Phone-Guide.html">⬇ Save web guide</a>
+      <button class="btn btn-ghost" type="button" onclick="window.print()">🖨 Print</button>
+    </div>
+    <div class="meta">Version 1.0 · November 2026 · Works offline once saved on your phone</div>
+  </div>
+</header>
+
+<nav class="jump" aria-label="Guide sections">
+  <div class="jump-scroll">
+    <a href="#quick">Quick start</a>
+    <a href="#prepare">Prepare</a>
+    <a href="#install">Install</a>
+    <a href="#login">Sign in</a>
+    <a href="#use">Use the app</a>
+    <a href="#offline">Offline maps</a>
+    <a href="#offline-test">Offline test</a>
+    <a href="#fix">Troubleshooting</a>
+    <a href="#demo">Demo checklist</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<!-- ============ QUICK START ============ -->
+<section id="quick">
+  <div class="section-kicker">Start here</div>
+  <h2>Quick start in five steps</h2>
+  <p class="lead">Use this if the XAMPP database and the API are already installed on your computer. Detailed instructions follow below.</p>
+
+  <div class="card">
+    <ol class="quick">
+      <li>
+        <strong>Connect your phone and computer to the same Wi-Fi.</strong>
+        Do not use mobile data for the first setup.
+      </li>
+      <li>
+        <strong>Start Apache and MySQL in XAMPP.</strong>
+        On the computer, open the XAMPP Control Panel and press <em>Start</em> for both.
+      </li>
+      <li>
+        <strong>Build and serve the app for your network.</strong>
+        Replace <code>192.168.1.25</code> with your computer's Wi-Fi IPv4 address (see <a href="#prepare">Part 1</a>).
+        <pre><code>flutter build web --release --dart-define=API_BASE_URL=http://192.168.1.25/tourist_guide_bohol_api/api/index.php
+dart run tool/serve_web.dart 8123 --lan</code></pre>
+      </li>
+      <li>
+        <strong>Open the printed address on your phone.</strong>
+        In Chrome or Safari, type the <em>Phone address</em> shown in the terminal, for example
+        <code>http://192.168.1.25:8123</code>.
+      </li>
+      <li>
+        <strong>Create an account, then download the offline map.</strong>
+        Sign in, open the cloud icon at the top, and tap <em>Download offline map</em>.
+      </li>
+    </ol>
+  </div>
+
+  <div class="callout warn">
+    <strong>Important:</strong> a phone cannot use <code>localhost</code> to reach your computer. Always use the computer's
+    Wi-Fi IPv4 address (for example <code>192.168.1.25</code>) in the phone browser and in the API address used to build the app.
+  </div>
+</section>
+
+<!-- ============ PREPARE ============ -->
+<section id="prepare">
+  <div class="section-kicker">Part 1</div>
+  <h2>Prepare the computer and the phone</h2>
+  <p class="lead">The website runs in the phone's browser, but the PHP API and MySQL database stay on your computer (or a hosted server).</p>
+
+  <h3>1.1 What you need</h3>
+  <ul>
+    <li>The project folder <code>tourist_guide_bohol_jerivee</code> on a Windows computer.</li>
+    <li>Flutter installed and working (<code>flutter doctor</code> shows no blocking errors).</li>
+    <li>XAMPP with Apache, MySQL, and PHP 8.1 or later.</li>
+    <li>An Android phone or iPhone with Chrome or Safari.</li>
+    <li>The phone and computer on the <strong>same Wi-Fi network</strong>.</li>
+  </ul>
+
+  <h3>1.2 Start the database and API</h3>
+  <ol class="steps">
+    <li>
+      <strong>Open XAMPP Control Panel</strong> and start <strong>Apache</strong> and <strong>MySQL</strong>.
+      Both status labels should turn green.
+    </li>
+    <li>
+      <strong>Confirm the API responds on the computer.</strong>
+      Open this address in the computer's browser:
+      <pre><code>http://localhost/tourist_guide_bohol_api/api/index.php?resource=destinations</code></pre>
+      You should see JSON data with destination records. If not, see <a href="#fix">Troubleshooting</a>.
+    </li>
+    <li>
+      <strong>Make sure the new columns exist.</strong>
+      For a database created before the contact/activities/accommodation update, import
+      <code>backend/sql/destination_guide_upgrade.sql</code> in phpMyAdmin, then import
+      <code>backend/sql/database.sql</code> again. The import updates the nine sample destinations without deleting users.
+    </li>
+  </ol>
+
+  <h3>1.3 Find the computer's Wi-Fi address</h3>
+  <ol class="steps">
+    <li>On Windows, press <kbd>Windows</kbd> + <kbd>R</kbd>, type <code>cmd</code>, and press Enter.</li>
+    <li>Run <code>ipconfig</code>.</li>
+    <li>
+      Under <strong>Wireless LAN adapter Wi-Fi</strong>, find <strong>IPv4 Address</strong>.
+      It usually looks like <code>192.168.1.25</code> or <code>192.168.0.12</code>.
+    </li>
+    <li>
+      Write it down. This is the address your phone will use. Do <strong>not</strong> use
+      <code>127.0.0.1</code> or <code>localhost</code> — those mean "this device" and would point at the phone itself.
+    </li>
+  </ol>
+
+  <div class="callout">
+    <strong>If the address changes:</strong> home routers can assign a different IP after a restart.
+    Check <code>ipconfig</code> again. If it changed, rebuild the app with the new API address (step 1.4).
+  </div>
+
+  <h3>1.4 Build the app with the correct API address</h3>
+  <p>Stop any running server first with <kbd>Ctrl</kbd> + <kbd>C</kbd>, then run this in the project folder. Replace the IP with your own:</p>
+  <pre><code>flutter build web --release --dart-define=API_BASE_URL=http://192.168.1.25/tourist_guide_bohol_api/api/index.php</code></pre>
+  <p class="small">This step is required. A build made with the default <code>localhost</code> API address will fail to sign in from the phone.</p>
+
+  <h3>1.5 Serve the build to the phone</h3>
+  <pre><code>dart run tool/serve_web.dart 8123 --lan</code></pre>
+  <p>The terminal prints something like:</p>
+  <pre><code>Serving C:\tourist_guide_bohol_jerivee\build\web at http://localhost:8123
+Phone address: http://192.168.1.25:8123</code></pre>
+  <ul>
+    <li>Keep this terminal window open while using the app. Closing it stops the website.</li>
+    <li>The <code>--lan</code> option is required for a phone. Without it, the server accepts connections only from the computer itself.</li>
+    <li>If Windows Firewall asks, allow access on <strong>Private networks</strong>.</li>
+  </ul>
+
+  <h3>1.6 Test the connection on the phone</h3>
+  <ol class="steps">
+    <li>Open Chrome or Safari on the phone.</li>
+    <li>Type the <strong>Phone address</strong>, including <code>http://</code> and the port, for example <code>http://192.168.1.25:8123</code>.</li>
+    <li>Also test the API itself on the phone: <code>http://192.168.1.25/tourist_guide_bohol_api/api/index.php?resource=destinations</code>.</li>
+    <li>If the API page shows JSON, the phone can reach the backend. If it does not, fix that before trying to sign in.</li>
+  </ol>
+</section>
+
+<!-- ============ INSTALL ============ -->
+<section id="install">
+  <div class="section-kicker">Part 2</div>
+  <h2>Install the guide on the phone</h2>
+  <p class="lead">The app can be added to the home screen and opened like a normal app. It keeps its own icon and, on a secure address, can reopen offline.</p>
+
+  <h3>Android (Chrome)</h3>
+  <ol class="steps">
+    <li>Open the app address in Chrome.</li>
+    <li>Tap the <strong>three-dot menu</strong> in the top-right corner.</li>
+    <li>Tap <strong>Add to Home screen</strong> or <strong>Install app</strong>.</li>
+    <li>Confirm with <strong>Install</strong> or <strong>Add</strong>. A Bohol Explorer icon appears on the home screen.</li>
+  </ol>
+
+  <h3>iPhone (Safari)</h3>
+  <ol class="steps">
+    <li>Open the app address in <strong>Safari</strong> (not inside Facebook or Messenger).</li>
+    <li>Tap the <strong>Share</strong> button (square with an arrow).</li>
+    <li>Scroll down and tap <strong>Add to Home Screen</strong>.</li>
+    <li>Tap <strong>Add</strong>, then open Bohol Explorer from the home screen.</li>
+  </ol>
+
+  <div class="callout warn">
+    <strong>Secure-address limit:</strong> installable PWA features, the offline app shell, and phone location work only on
+    <strong>HTTPS</strong> or <strong>localhost</strong>. A plain <code>http://192.168.x.x</code> address still runs the app and
+    saves offline content, but Chrome may only create a shortcut, and a full page reload with no internet may not work.
+    For a complete offline demonstration on Android, use the USB method in <a href="#full-offline">Part 6</a>, or host the
+    build on an HTTPS address.
+  </div>
+</section>
+
+<!-- ============ LOGIN ============ -->
+<section id="login">
+  <div class="section-kicker">Part 3</div>
+  <h2>Create an account and sign in</h2>
+  <p class="lead">Login is mandatory. Guests cannot browse the destinations, map, saved guides, or itineraries.</p>
+
+  <h3>Create a new account</h3>
+  <ol class="steps">
+    <li>On the full-screen welcome page, tap <strong>Create account</strong> (the button on the photo panel, or the link under the form).</li>
+    <li>Enter your <strong>name</strong>, a valid <strong>email address</strong>, and a <strong>password</strong> of at least 8 characters.</li>
+    <li>Re-enter the same password in <strong>Confirm password</strong>.</li>
+    <li>Tap <strong>Create account</strong>. On success you are signed in and the Home page opens.</li>
+  </ol>
+
+  <h3>Sign in to an existing account</h3>
+  <ol class="steps">
+    <li>Enter the account's <strong>email</strong> and <strong>password</strong>.</li>
+    <li>Tap <strong>Sign in</strong>.</li>
+    <li>If the API is unreachable, a message explains that the PHP/MySQL API is unavailable. Start Apache and MySQL, or check the API address used at build time.</li>
+  </ol>
+
+  <h3>Stay signed in and sign out</h3>
+  <ul>
+    <li>The app remembers a valid session. Reopening it later takes you straight to Home unless the token expired (12 hours) or the API rejects it.</li>
+    <li>After one successful online sign-in, the cached profile also allows the guide to reopen while the API is offline.</li>
+    <li>To sign out: tap the <strong>profile/avatar</strong> in the top-right corner, then <strong>Sign out</strong>.</li>
+  </ul>
+
+  <div class="callout">
+    <strong>No self-service password reset is built in.</strong> Use the password you registered, or create a new account.
+    Passwords are stored hashed by PHP; they are never stored as plain text by the app.
+  </div>
+</section>
+
+<!-- ============ USE ============ -->
+<section id="use">
+  <div class="section-kicker">Part 4</div>
+  <h2>Use the guide, step by step</h2>
+  <p class="lead">On a phone, the bottom bar has <strong>Home</strong>, <strong>Explore</strong>, <strong>Map</strong>, <strong>Saved</strong>, and <strong>Plans</strong>.</p>
+
+  <h3>4.1 Home page</h3>
+  <ul>
+    <li>Shows a welcome banner, category shortcuts (Nature, Beaches, Culture, Caves), and popular destinations.</li>
+    <li>Type in <strong>Search destinations in Bohol…</strong> and press Enter to search.</li>
+    <li>Tap <strong>View all</strong> or <strong>Explore all</strong> to open the full destination list.</li>
+    <li>Tap <strong>Plan your Bohol trip</strong> to open the recommended itineraries.</li>
+  </ul>
+
+  <h3>4.2 Search for a destination</h3>
+  <ol class="steps">
+    <li>Open <strong>Explore</strong> from the bottom bar.</li>
+    <li>Tap the search field with the hint <strong>Search by destination, town, or keyword</strong>.</li>
+    <li>Type a place, town, or activity — for example <em>Chocolate Hills</em>, <em>Panglao</em>, <em>snorkeling</em>, or <em>hotel</em>.</li>
+    <li>The number of results updates immediately. Tap the <strong>×</strong> in the field to clear the search.</li>
+  </ol>
+
+  <h3>4.3 Filter by category</h3>
+  <ol class="steps">
+    <li>On <strong>Explore</strong>, scroll to the row of category chips.</li>
+    <li>Tap a category: <em>All</em>, <em>Nature &amp; Adventure</em>, <em>Beaches &amp; Islands</em>, <em>Historical &amp; Cultural</em>, <em>Caves &amp; Waterfalls</em>, <em>Wildlife &amp; Eco-Tourism</em>, or <em>Food &amp; Local Experiences</em>.</li>
+    <li>Search and category filters work together. Tap <strong>All</strong> to remove the category filter.</li>
+  </ol>
+
+  <h3>4.4 Open a destination's travel information</h3>
+  <p>Tap any destination card. The detail panel shows:</p>
+  <div class="card">
+    <div class="feature">
+      <div class="feature-icon" aria-hidden="true">💰</div>
+      <div><h4>Entrance fee &amp; operating hours</h4><p>Current guidance; confirm locally because rates and schedules change.</p></div>
+    </div>
+    <div class="feature">
+      <div class="feature-icon" aria-hidden="true">💡</div>
+      <div><h4>Travel tip</h4><p>Practical advice for the site, such as footwear, water, or wildlife rules.</p></div>
+    </div>
+    <div class="feature">
+      <div class="feature-icon" aria-hidden="true">🥾</div>
+      <div><h4>Things to do</h4><p>Activities available at or near the destination.</p></div>
+    </div>
+    <div class="feature">
+      <div class="feature-icon" aria-hidden="true">🏨</div>
+      <div><h4>Where to stay</h4><p>Accommodation areas and nearby towns, not a booking service.</p></div>
+    </div>
+    <div class="feature">
+      <div class="feature-icon" aria-hidden="true">📞</div>
+      <div><h4>Contact information</h4><p>Official municipal tourism contacts and the provincial tourism office.</p></div>
+    </div>
+    <div class="feature">
+      <div class="feature-icon" aria-hidden="true">📍</div>
+      <div><h4>Map coordinates</h4><p>Reference point for the visitor area, not a property boundary.</p></div>
+    </div>
+  </div>
+
+  <h3>4.5 Save a destination and get directions</h3>
+  <ul>
+    <li><strong>Favorite</strong> — adds the place to <em>Saved → Favorites</em>.</li>
+    <li><strong>Save offline</strong> — keeps the written guide in <em>Saved → Offline</em> and in the Offline guide center. Tap again to remove it.</li>
+    <li><strong>Mark visited</strong> — adds it to <em>Saved → Visited</em> for your trip record.</li>
+    <li><strong>Get directions</strong> — opens Google Maps with the destination coordinates. You still need a connection for Google Maps.</li>
+    <li><strong>View on Bohol map</strong> — switches to the in-app map.</li>
+  </ul>
+
+  <h3>4.6 Use the map</h3>
+  <ol class="steps">
+    <li>Open <strong>Map</strong> from the bottom bar.</li>
+    <li>Pinch to zoom and drag to move. Red pins mark the destinations.</li>
+    <li>Tap a red pin (or a row under <strong>Mapped destinations</strong>) to open its guide.</li>
+    <li>Tap the <strong>target icon</strong> at the top-right of the map to show your approximate location.</li>
+    <li>Allow location access when the browser asks. If you deny it, the map still works, but your position is not shown.</li>
+  </ol>
+  <p class="small">Location requires HTTPS or localhost in modern browsers. On a plain LAN HTTP address, the browser may block it.</p>
+
+  <h3>4.7 Recommended itineraries (Plans)</h3>
+  <ol class="steps">
+    <li>Open <strong>Plans</strong> in the bottom bar (labelled <em>Itineraries</em> on a wide screen).</li>
+    <li>Read the duration, number of stops, suggested route, and budget note.</li>
+    <li>Tap the <strong>bookmark icon</strong> to save a plan. A filled bookmark means it is saved.</li>
+    <li>Tap any stop to open its destination details.</li>
+  </ol>
+  <p class="small">Routes are examples, not confirmed tour packages. Check transport, fees, weather, and site access before travelling.</p>
+
+  <h3>4.8 Saved library</h3>
+  <ol class="steps">
+    <li>Open <strong>Saved</strong> in the bottom bar.</li>
+    <li>Switch between the <strong>Favorites</strong>, <strong>Offline</strong>, and <strong>Visited</strong> tabs.</li>
+    <li>Tap <strong>Open offline guide center</strong> to manage downloaded content.</li>
+  </ol>
+
+  <h3>4.9 Account menu and administrator dashboard</h3>
+  <ul>
+    <li>Tap the avatar in the top-right to see your name and email, and to sign out.</li>
+    <li>Administrator accounts also see <strong>Admin dashboard</strong>.</li>
+    <li>The dashboard has <strong>Overview</strong>, <strong>All users</strong>, <strong>User activities</strong>, and <strong>Destinations</strong> sections.</li>
+    <li>In <strong>Destinations</strong>, tap <strong>Add destination</strong> to create a record, or edit an existing one. Fields include name, municipality, category, description, image URL, latitude, longitude, entrance fee, operating hours, travel tips, contact information, activities, and accommodations.</li>
+    <li>After promoting an account to <code>admin</code> in phpMyAdmin, sign out and sign in again so the new role appears.</li>
+  </ul>
+</section>
+
+<!-- ============ OFFLINE ============ -->
+<section id="offline">
+  <div class="section-kicker">Part 5</div>
+  <h2>Download content for offline use</h2>
+  <p class="lead">Do this while the phone has a working connection and the computer's server is running. Downloading prepares the guide for a trip with weak or no mobile data.</p>
+
+  <h3>5.1 Open the Offline guide center</h3>
+  <ul>
+    <li>Tap the <strong>cloud icon</strong> at the top of the screen (cloud with a check when online).</li>
+    <li>Or open <strong>Saved → Open offline guide center</strong>.</li>
+    <li>The page shows <strong>Cached places</strong>, <strong>Map tiles</strong>, <strong>Storage used</strong>, and <strong>Map saved</strong>.</li>
+  </ul>
+
+  <h3>5.2 Download the offline map</h3>
+  <ol class="steps">
+    <li>Scroll to <strong>Bohol offline map</strong>.</li>
+    <li>Tap <strong>Download offline map</strong>.</li>
+    <li>Keep the app open. A progress bar shows <em>x of y tiles</em>. You can tap <strong>Cancel</strong> to stop.</li>
+    <li>Wait for the message <strong>“Offline map saved. You can now open the map without the internet.”</strong></li>
+    <li>Confirm that <strong>Map tiles</strong> is greater than 0 and the card shows a green <strong>READY</strong> badge.</li>
+  </ol>
+  <p class="small">The download covers Bohol overview zoom levels plus a closer area around each destination. It is intentionally limited for the OpenStreetMap tile usage policy; it is not a complete navigation dataset.</p>
+
+  <h3>5.3 Save individual destination guides</h3>
+  <ol class="steps">
+    <li>Open a destination and tap <strong>Save offline</strong>.</li>
+    <li>The guide appears under <strong>Saved → Offline</strong> and in the <strong>Saved for offline reading</strong> list.</li>
+    <li>Open each destination once while online so its photo is cached too.</li>
+    <li>Tap <strong>Save offline</strong> again to remove it.</li>
+  </ol>
+
+  <h3>5.4 Update or remove downloaded content</h3>
+  <ul>
+    <li><strong>Update cached information</strong> — refreshes the written catalogue from the API.</li>
+    <li><strong>Update offline map</strong> — downloads tiles again after a map update.</li>
+    <li><strong>Remove</strong> — opens <em>Remove offline map?</em>. This deletes downloaded tiles and cached photos, but keeps the written guides and saved destinations.</li>
+  </ul>
+
+  <h3>5.5 What is stored where</h3>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Content</th><th>Stored on the phone</th><th>Available offline</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Destination names, descriptions, fees, hours, tips, contacts, activities, accommodation guidance</td><td>IndexedDB catalogue</td><td>Yes, after the first successful API load</td></tr>
+        <tr><td>Destination photos</td><td>IndexedDB image cache</td><td>Yes, once viewed or saved offline</td></tr>
+        <tr><td>Map tiles</td><td>IndexedDB tile cache</td><td>Yes, for downloaded areas and zoom levels</td></tr>
+        <tr><td>Signed-in profile and token</td><td>Browser local storage</td><td>Yes, until the token expires</td></tr>
+        <tr><td>Favorites, visited places, saved itineraries</td><td>Browser preferences</td><td>Yes, on this device</td></tr>
+        <tr><td>Admin changes, fresh API data, activity logging</td><td>PHP/MySQL server</td><td>No — needs a connection</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============ OFFLINE TEST ============ -->
+<section id="offline-test">
+  <div class="section-kicker">Part 6</div>
+  <h2>Test offline access on the phone</h2>
+  <p class="lead">Run this test after downloading the map. It proves the offline features for a demonstration or thesis evaluation.</p>
+
+  <ol class="steps">
+    <li><strong>Stay signed in and open every destination you want cached</strong> before going offline.</li>
+    <li><strong>Open the Offline guide center</strong> and confirm the tile count is above zero.</li>
+    <li><strong>Turn on Airplane mode</strong> on the phone (or turn off Wi-Fi and mobile data).</li>
+    <li><strong>Reload the page.</strong> A full offline reload needs the app-shell service worker, which requires HTTPS or localhost. See the secure-address note below.</li>
+    <li><strong>Confirm the orange banner</strong> says <em>“Offline mode — showing guides and maps saved on this device.”</em></li>
+    <li><strong>Search and filter</strong> destinations; cached results should still appear.</li>
+    <li><strong>Open the map</strong>; downloaded areas should still display tiles.</li>
+    <li><strong>Turn Airplane mode off.</strong> The banner disappears and the app refreshes the catalogue. Tap <strong>Retry</strong> if it does not.</li>
+  </ol>
+
+  <div class="callout warn">
+    <strong>Reloading offline on a phone:</strong> service workers only run on <code>https://</code> or <code>http://localhost</code>.
+    On <code>http://192.168.x.x</code>, the app and IndexedDB work while the page is already open, but a cold reload with no
+    internet may fail. Test the full offline reload on the computer's Chrome (localhost) or use one of the options below.
+  </div>
+
+  <h3 id="full-offline">Option A — Android USB, full offline demo</h3>
+  <p>This makes the phone treat the app as <code>localhost</code>, which allows the service worker and a true offline reload.</p>
+  <ol class="steps">
+    <li>Install Android Platform Tools (<code>adb</code>) on the computer.</li>
+    <li>On the phone, enable <strong>Developer options → USB debugging</strong>, connect USB, and allow debugging.</li>
+    <li>Keep the guide server running, then run:
+      <pre><code>adb reverse tcp:8123 tcp:8123</code></pre>
+    </li>
+    <li>On the phone, open <code>http://localhost:8123</code>.</li>
+    <li>Sign in online, download the map, then enable Airplane mode and reload. The app shell and cached content should open.</li>
+  </ol>
+  <p class="small">The API can stay on the LAN address; it is only needed while online. If you also reverse port 80, the API can use <code>http://localhost/...</code>, but rebuilding is then required.</p>
+
+  <h3>Option B — HTTPS hosting</h3>
+  <p>For a realistic phone deployment, host <code>build/web</code> on an HTTPS static host and make the PHP API available over HTTPS at a public address. Rebuild with that API URL. Then install the app and test offline mode on the phone. A phone cannot reach a PHP server that only runs on <code>localhost</code> of your computer.</p>
+
+  <h3>Option C — Desktop Chrome (easiest for evaluation)</h3>
+  <p>Open <code>http://localhost:8123</code> in Chrome on the computer. Service workers and IndexedDB work on localhost. Use DevTools → <strong>Network → Offline</strong>, then reload to demonstrate the offline shell, cached guides, and downloaded tiles.</p>
+</section>
+
+<!-- ============ TROUBLESHOOTING ============ -->
+<section id="fix">
+  <div class="section-kicker">Part 7</div>
+  <h2>Troubleshooting</h2>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Problem</th><th>Likely cause</th><th>What to do</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>“This site can't be reached” on the phone</td>
+          <td>Server stopped, wrong IP, different Wi-Fi, or firewall</td>
+          <td>Keep the terminal running; confirm the <em>Phone address</em>; check that both devices use the same Wi-Fi; allow the app through Windows Firewall on Private networks; do not use <code>localhost</code> on the phone.</td>
+        </tr>
+        <tr>
+          <td>“PHP/MySQL API is unavailable” or sign-in fails</td>
+          <td>Apache or MySQL stopped, wrong API URL, or API unreachable from the phone</td>
+          <td>Start Apache and MySQL; open the API URL in the phone browser; rebuild with <code>--dart-define=API_BASE_URL=http://YOUR-IP/tourist_guide_bohol_api/api/index.php</code>; check that the project is copied to <code>C:\xampp\htdocs\tourist_guide_bohol_api</code>.</td>
+        </tr>
+        <tr>
+          <td>Login says the password is wrong</td>
+          <td>Account not registered, typo, or different database</td>
+          <td>Use <strong>Create account</strong> to register; passwords need at least 8 characters. Confirm phpMyAdmin shows the user in <code>bohol_tourism_db.users</code>.</td>
+        </tr>
+        <tr>
+          <td>Blank or white screen</td>
+          <td>First load still running, cached build is stale, or browser is too old</td>
+          <td>Wait for the loading ring; refresh; clear site data for the address; use a current Chrome, Edge, or Safari; rebuild after source changes.</td>
+        </tr>
+        <tr>
+          <td>Map is blank or grey</td>
+          <td>No connection, no downloaded tiles, or tile requests blocked</td>
+          <td>Check the connection; open the map online once; download the offline map; allow <code>tile.openstreetmap.org</code>; note that areas and zoom levels outside the download are not cached.</td>
+        </tr>
+        <tr>
+          <td>Map tiles are partly missing offline</td>
+          <td>Only the overview and destination blocks were downloaded</td>
+          <td>This is expected. Download again with a connection, or stay within the covered Bohol area and zoom levels.</td>
+        </tr>
+        <tr>
+          <td>“Location is unavailable”</td>
+          <td>Permission denied, or the page is not a secure context</td>
+          <td>Allow location for the site; use HTTPS or localhost. On iPhone, check Settings → Safari → Location. The map still works without your position.</td>
+        </tr>
+        <tr>
+          <td>Offline reload fails on the phone</td>
+          <td>Page served over plain LAN HTTP, so no service worker</td>
+          <td>Use desktop localhost, Android <code>adb reverse</code>, or an HTTPS host. IndexedDB content is still there; only the app shell cannot start without a network.</td>
+        </tr>
+        <tr>
+          <td>“Install app” is missing</td>
+          <td>Not HTTPS, unsupported browser, or already installed</td>
+          <td>Use Chrome on Android or Safari on iPhone; use HTTPS for a real install. “Add to Home screen” may still create a shortcut.</td>
+        </tr>
+        <tr>
+          <td>Photos do not appear offline</td>
+          <td>The image was never viewed while online</td>
+          <td>Open each destination once online, or mark it <strong>Save offline</strong>. Wikimedia images need a connection the first time.</td>
+        </tr>
+        <tr>
+          <td>Offline information looks outdated</td>
+          <td>The cache was saved earlier</td>
+          <td>Reconnect and tap <strong>Update cached information</strong> in the Offline guide center. Fees, hours, and contacts can change.</td>
+        </tr>
+        <tr>
+          <td>Download stops or storage is full</td>
+          <td>Connection dropped or browser storage quota reached</td>
+          <td>Keep the app open, free browser storage, remove unused site data, and retry. Clearing site data deletes cached guides, photos, tiles, and the saved session.</td>
+        </tr>
+        <tr>
+          <td>Need to start over</td>
+          <td>Stale cache or test data</td>
+          <td>Clear the site's storage in the browser settings, then reload and sign in again. On Chrome: site info → Delete data.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============ DEMO ============ -->
+<section id="demo">
+  <div class="section-kicker">Part 8</div>
+  <h2>Demonstration checklist</h2>
+  <p class="lead">Use this sequence to show that every objective works during a thesis defense or class demo.</p>
+
+  <div class="card">
+    <h4>Tourism information</h4>
+    <ul class="checklist">
+      <li>Open a destination and show the description, entrance fee, operating hours, travel tip, activities, accommodation guidance, and contact information.</li>
+      <li>Tap <strong>Get directions</strong> to show the external map link.</li>
+    </ul>
+
+    <h4>Destination search and filtering</h4>
+    <ul class="checklist">
+      <li>In <strong>Explore</strong>, search for <em>snorkeling</em>, <em>hotel</em>, or a municipality.</li>
+      <li>Select <em>Beaches &amp; Islands</em> and show that search and category filters combine.</li>
+    </ul>
+
+    <h4>Map and tourist navigation</h4>
+    <ul class="checklist">
+      <li>Open <strong>Map</strong>, tap a red pin, and open the destination guide.</li>
+      <li>Tap the target icon and allow location to show the approximate position.</li>
+    </ul>
+
+    <h4>Offline access and offline maps</h4>
+    <ul class="checklist">
+      <li>In the Offline guide center, tap <strong>Download offline map</strong> and wait for the READY badge and tile count.</li>
+      <li>Turn on Airplane mode, reload, and show the orange offline banner and cached destinations.</li>
+      <li>Open the map and show downloaded tiles; search still works without a connection.</li>
+      <li>Turn the connection back on and show the automatic refresh.</li>
+    </ul>
+
+    <h4>Recommended itineraries</h4>
+    <ul class="checklist">
+      <li>Open <strong>Plans</strong>, save an itinerary with the bookmark icon, and open one of its stops.</li>
+    </ul>
+
+    <h4>Accounts and administration (optional)</h4>
+    <ul class="checklist">
+      <li>Register a new account and show that browsing requires sign-in.</li>
+      <li>Sign in as an administrator and show Overview, All users, User activities, and Destinations.</li>
+    </ul>
+  </div>
+
+  <h3>Before you present</h3>
+  <ul class="checklist">
+    <li>Charge the phone and keep the computer's terminal open.</li>
+    <li>Confirm the phone and computer are on the same Wi-Fi and the API URL is the current LAN IP.</li>
+    <li>Sign in and download the offline map in advance; cached content survives closing the browser.</li>
+    <li>Have a second account ready in case the demo account's session expires.</li>
+    <li>Keep this guide on the phone; it needs no internet.</li>
+  </ul>
+
+  <div class="callout">
+    <strong>Good to know:</strong> signed-in actions (sign-in, searches, views, favorites, offline saves, visited places, itinerary saves, and admin changes) are recorded for system administration and evaluation. The app does not collect passwords, password hashes, or tokens for that activity view.
+  </div>
+
+  <h3>Data credits and accuracy</h3>
+  <ul>
+    <li>Map data © OpenStreetMap contributors, available under the Open Database License. The offline download is limited and is not turn-by-turn navigation.</li>
+    <li>Destination photos come from Wikimedia Commons; see <code>DESTINATION_IMAGE_CREDITS.md</code> in the project.</li>
+    <li>Contact details come from official Bohol tourism pages. Fees, schedules, contacts, and access rules can change — confirm them before travel or publication.</li>
+    <li>Map pins mark visitor areas, not property boundaries. Verify routes and coordinates on site.</li>
+  </ul>
+
+  <div class="footer-actions">
+    <a class="btn btn-outline" href="Bohol-Explorer-Phone-Guide.pdf" download>⬇ Download PDF</a>
+    <a class="btn btn-outline" href="user-guide.html" download="Bohol-Explorer-Phone-Guide.html">⬇ Save web guide</a>
+    <button class="btn btn-outline" type="button" onclick="window.print()">🖨 Print</button>
+  </div>
+
+  <footer>
+    <div><strong>Bohol Explorer — Phone User Guide</strong> · Version 1.0 · November 2026</div>
+    <div>This file is self-contained. Once downloaded, it opens without an internet connection.</div>
+    <a class="top-link" href="#quick">↑ Back to quick start</a>
+  </footer>
+</section>
+
+</div>
+</body>
+</html>

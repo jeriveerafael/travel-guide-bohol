@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="$FLUTTER_BASE_HREF">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="description" content="Bohol tourist information and travel guide with destination search, offline maps, saved guides, and recommended itineraries.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#087E8B">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Bohol Explorer">
+  <title>Bohol Explorer | Tourist Information and Travel Guide</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/png" href="icons/Icon-192.png">
+  <link rel="apple-touch-icon" href="icons/Icon-180.png">
+  <link rel="preconnect" href="https://tile.openstreetmap.org" crossorigin>
+  <link rel="preconnect" href="https://upload.wikimedia.org" crossorigin>
+  <style>
+    html, body { margin: 0; height: 100%; background: #FCFDFD; }
+    #loading { display: flex; height: 100%; align-items: center; justify-content: center;
+      flex-direction: column; gap: 14px; font-family: system-ui, sans-serif; color: #087E8B; }
+    #loading .ring { width: 34px; height: 34px; border: 3px solid #DDEBE8;
+      border-top-color: #087E8B; border-radius: 50%; animation: spin 0.9s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    noscript { display: block; padding: 24px; font-family: system-ui, sans-serif; color: #30454A; }
+  </style>
+</head>
+<body>
+  <noscript>Bohol Explorer needs JavaScript enabled to show destination guides, maps, and offline content.</noscript>
+  <div id="loading"><div class="ring"></div><span>Loading Bohol Explorer…</span></div>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function () {
+        navigator.serviceWorker.register('service_worker.js').then(function () {
+          return navigator.serviceWorker.ready;
+        }).then(function (registration) {
+          // Give Flutter time to finish loading fonts, CanvasKit and assets,
+          // then ask the worker to cache everything this session used.
+          setTimeout(function () {
+            var pattern = /\.(js|wasm|json|otf|ttf|woff2?|css|png|jpe?g|svg|html)(\?|$)/i;
+            var urls = performance.getEntriesByType('resource')
+              .map(function (entry) { return entry.name; })
+              .filter(function (url) {
+                return url.indexOf(location.origin) === 0 && pattern.test(url);
+              });
+            urls.push(location.href.split('#')[0]);
+            if (registration.active) {
+              registration.active.postMessage({ type: 'CACHE_URLS', urls: urls });
+            }
+          }, 2000);
+        }).catch(function () {
+          // Offline app shell is unavailable; IndexedDB offline content still works.
+        });
+      });
+    }
+  </script>
+  <script src="flutter_bootstrap.js" async></script>
+</body>
+</html>
